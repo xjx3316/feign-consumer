@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by xjx on 2018/11/15.
  */
-@FeignClient("hello-service")
+@FeignClient(name = "hello-service",fallback = HelloServiceFallback.class)
 public interface HelloService {
 
     @RequestMapping("/hello")
