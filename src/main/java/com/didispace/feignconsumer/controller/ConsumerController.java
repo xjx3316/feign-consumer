@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by xjx on 2018/11/15.
  */
@@ -17,7 +20,13 @@ public class ConsumerController {
     private HelloService helloService;
 
     @RequestMapping(value = "/feign-consumer", method = RequestMethod.GET)
-    public String helloConsumer() {
+    public String helloConsumer(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            System.out.println("cookie: "+cookie.getName()+"="+cookie.getValue());
+        }
+
+
         return helloService.hello();
     }
 
